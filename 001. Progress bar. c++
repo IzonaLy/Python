@@ -1,0 +1,17 @@
+import os
+s=os.get_terminal_size()
+print(s.columns)
+print(s.lines)
+import math
+import time
+from tqdm import tqdm
+from joblib import Parallel, delayed
+
+results=[]
+
+for i in tqdm(range(8000)):
+  results.append(math.factorial(i))
+
+results = [math.factorial(x) for x in tqdm(range(8000))]
+
+results=Parallel(n_jobs=2)(delayed(math.factorial)(x)for x in tqdm(range(8000)))
